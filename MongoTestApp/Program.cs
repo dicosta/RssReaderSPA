@@ -51,7 +51,7 @@ namespace MongoTestApp
             
         }
 
-        protected override IKernel CreateKernel()
+        protected IKernel CreateKernel()
         {
             var settings = new NinjectSettings { LoadExtensions = false };
 
