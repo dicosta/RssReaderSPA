@@ -10,14 +10,19 @@ namespace RssReader.Model.Mongo.Repositories
 {
     public class GuidKeyedRepository<T> : Repository<T>, IGuidKeyedRepository<T> where T : class
     {
+        public GuidKeyedRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
+        {
+        }
+
         public T GetById(Guid id)
         {
-            return base._collection.FindOneByIdAs<T>(id);
+            return base.Collection.FindOneByIdAs<T>(id);
         }
 
         public void Delete(Guid id)
         {
-            base._collection.Remove(Query.EQ("_id",id));
+            base.Collection.Remove(Query.EQ("_id", id));
         }
     }
 }
