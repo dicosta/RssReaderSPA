@@ -16,6 +16,12 @@ namespace MongoTestApp
     {
         public static void Main(string[] args)
         {
+            var p = new Program();
+            var kernel = p.CreateKernel();
+
+
+
+            /*
             var connectionString = "mongodb://localhost";
 
             var client = new MongoClient(connectionString);
@@ -42,6 +48,8 @@ namespace MongoTestApp
             
             entity.URL = "www.blabla.com";
             collection.Save(entity);
+            */ 
+              
             /*
             var update = Update.Set("Name", "Harry");
             collection.Update(query, update);
@@ -57,9 +65,9 @@ namespace MongoTestApp
 
             var kernel = new StandardKernel(settings);
 
-            kernel.Load(Assembly.GetExecutingAssembly());
+            //kernel.Load(Assembly.GetExecutingAssembly());
             //kernel.Load(AppDomain.CurrentDomain.GetAssemblies());
-            //kernel.Load("*.dll");
+            kernel.Load("*.dll");
          
             return kernel;
         }

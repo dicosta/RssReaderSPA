@@ -16,6 +16,8 @@ namespace RssReader.Model
 
         public string Body { get; set; }
 
+        public string Link { get; set; }
+
         public IList<string> Tags { get; set; }
     }
 }
