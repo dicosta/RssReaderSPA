@@ -6,16 +6,37 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using RssReader.Model.Contracts;
+using RssReader.Model.Mongo.Infrastructure;
 
 namespace RssReader.Model.Mongo.Repositories
 {
     public class ReadOnlyRepository<T> : IReadOnlyRepository<T> where T : class
     {
-        protected MongoCollection<T> _collection { get; set; }
+        private MongoCollection<T> _collection;
 
+        protected readonly IUnitOfWork _unitOfWork;
+
+        public ReadOnlyRepository(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        protected MongoCollection<T> Collection
+        {
+            get
+            {
+                if (_collection == null)
+                {
+                    _collection = ((MongoUnitOfWork)_unitOfWork).GetMongoCollection<T>();
+                }
+
+                return _collection;
+            }
+        }
+        
         public virtual IQueryable<T> GetAll()
         {
-            return _collection.AsQueryable<T>();
+            return Collection.AsQueryable<T>();
         }
     }
 }

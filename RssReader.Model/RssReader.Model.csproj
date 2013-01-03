@@ -42,6 +42,7 @@
     <Compile Include="Contracts\IGuidKeyedRepository.cs" />
     <Compile Include="Contracts\IReadOnlyRepository.cs" />
     <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Feed.cs" />
     <Compile Include="New.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

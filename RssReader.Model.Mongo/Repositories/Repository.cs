@@ -10,42 +10,47 @@ namespace RssReader.Model.Mongo.Repositories
 {
     public class Repository<T> : ReadOnlyRepository<T>, IRepository<T> where T : class
     {
+        public Repository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
+        {
+        }
+
         public virtual void Add(T newItem)
         {
-            base._collection.Insert(newItem);
+            base.Collection.Insert(newItem);
         }
 
         public virtual void Add(IEnumerable<T> newItems)
         {
-            base._collection.Insert(newItems);
+            base.Collection.Insert(newItems);
         }
 
         public virtual void Update(T item)
         {
-            base._collection.Save(item);
+            base.Collection.Save(item);
         }
 
         public virtual void Update(IEnumerable<T> items)
         {
             foreach (T item in items)
             {
-                base._collection.Save(item);
+                base.Collection.Save(item);
             }
         }
 
         public virtual void DeleteAll()
         {
-            base._collection.RemoveAll();
+            base.Collection.RemoveAll();
         }
 
         public virtual int Count()
         {
-            return (int)base._collection.Count();
+            return (int)base.Collection.Count();
         }
 
         public virtual bool Exists(System.Linq.Expressions.Expression<Func<T, bool>> criteria)
         {
-            return base._collection.AsQueryable<T>().Any(criteria);
+            return base.Collection.AsQueryable<T>().Any(criteria);
         }
     }
 }
