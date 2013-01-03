@@ -19,6 +19,9 @@ namespace RssReader.Model.Mongo.Configuration
 
             IMongoCollectionProvider collectionProvider = new MongoCollectionProvider(connectionString);
 
+            var indexInitializer = new IndexInitializer(collectionProvider);
+            indexInitializer.CreateIndexes();
+
             Bind<IMongoCollectionProvider>().ToConstant(collectionProvider)
                 .InSingletonScope();
 

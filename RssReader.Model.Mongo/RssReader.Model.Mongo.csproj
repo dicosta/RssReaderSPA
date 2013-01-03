@@ -54,6 +54,7 @@
     <Compile Include="Configuration\MongoModule.cs" />
     <Compile Include="Configuration\RepositoryModule.cs" />
     <Compile Include="Infrastructure\Contracts\IMongoCollectionProvider.cs" />
+    <Compile Include="Infrastructure\IndexInitializer.cs" />
     <Compile Include="Infrastructure\MongoCollectionProvider.cs" />
     <Compile Include="Infrastructure\MongoUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
