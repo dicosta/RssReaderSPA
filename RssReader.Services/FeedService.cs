@@ -15,7 +15,7 @@ using System.Security.Cryptography;
 
 namespace RssReader.Services
 {
-    public class FeedService : IFeedService
+    public class FeedService : BaseService, IFeedService
     {
         private readonly IGuidKeyedRepository<Feed> feedRepository;
         private readonly IGuidKeyedRepository<New> newRepository;
