@@ -4,19 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject.Modules;
-using RssReader.Model;
-using RssReader.Model.Contracts;
-using RssReader.Model.Mongo.Infrastructure;
-using RssReader.Model.Mongo.Repositories;
+using RssReader.Services;
+using RssReader.Services.Contracts;
 using Ninject.Web.Common;
 
 namespace MongoTestApp.Modules
 {
-    public class PersistenceModule : NinjectModule
+    public class ServiceModule : NinjectModule
     {
         public override void Load()
         {
-            Bind<IUnitOfWork>().To<MongoUnitOfWork>()
+            Bind<IFeedService>().To<FeedService>()
                 .InRequestScope();
         }
     }

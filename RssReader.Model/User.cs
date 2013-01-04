@@ -13,5 +13,7 @@ namespace RssReader.Model
         public string UserName { get; set; }
 
         public IList<string> Tags { get; set; }
+
+        public IList<Guid> Feeds { get; set; }
     }
 }

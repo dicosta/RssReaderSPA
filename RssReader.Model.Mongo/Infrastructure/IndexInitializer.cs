@@ -20,6 +20,7 @@ namespace RssReader.Model.Mongo.Infrastructure
         {
             _collectionProvider.GetCollection<New>().EnsureIndex(new string[] { "FeedId" });
             _collectionProvider.GetCollection<New>().EnsureIndex(new string[] { "Tags" });
+            _collectionProvider.GetCollection<New>().EnsureIndex(new string[] { "LastItemTimesStamp" });
         }
     }
 }
