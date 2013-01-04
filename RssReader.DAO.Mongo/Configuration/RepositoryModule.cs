@@ -18,6 +18,8 @@ namespace RssReader.DAO.Mongo.Configuration
 
             Bind<IGuidKeyedRepository<New>>().To<GuidKeyedRepository<New>>().InTransientScope();
 
+            Bind<IGuidKeyedRepository<User>>().To<GuidKeyedRepository<User>>().InTransientScope();
+
             /*
             Bind<IGuidKeyedRepository<Feed>>().To<GuidKeyedRepository<Feed>>().InTransientScope();
             */

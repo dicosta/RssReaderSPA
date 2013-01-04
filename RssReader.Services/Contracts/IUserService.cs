@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RssReader.Model;
 
 namespace RssReader.Services.Contracts
 {
-    public interface IFeedService
+    public interface IUserService
     {
-        void SuscribeFeed(string feedURL);
+        void AddCategory(string categoryName);
 
-        void RefreshFeed(Guid feedId);
+        void RemoveCategory(string categoryName);
     }
 }

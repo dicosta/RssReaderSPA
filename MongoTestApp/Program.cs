@@ -8,7 +8,9 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using Ninject;
+using Rhino.Mocks;
 using RssReader.Model;
+using RssReader.Model.Contracts;
 using RssReader.Services.Contracts;
 
 namespace MongoTestApp
@@ -18,20 +20,45 @@ namespace MongoTestApp
         public static void Main(string[] args)
         {
             var p = new Program();
+
             var kernel = p.CreateKernel();
-
+            
+            
+            var userRepository = kernel.Get<IGuidKeyedRepository<User>>();
+            var userService = kernel.Get<IUserService>();
             var feedService = kernel.Get<IFeedService>();
+            var newService = kernel.Get<INewService>();
 
-            Feed newFeed = new Feed()
+            userRepository.Add(new User()
             {
-                URL = "http://www.43folders.com/rss.xml"
-            };
+                UserName = "Diego"                
+            });
 
+            var currentUserProvider = kernel.Get<ICurrentUserProvider>();
 
-            feedService.SuscribeFeed(newFeed);
+            userService.AddCategory("Noticias");
+            userService.AddCategory("Deportes");
+            userService.AddCategory("Espectaculos");
+                        
+            feedService.SuscribeFeed("http://www.43folders.com/rss.xml");
 
-            feedService.RefreshFeed(newFeed.Id);
+            var feedId = currentUserProvider.GetCurrentUser().Feeds.First();
+            
+            feedService.RefreshFeed(feedId);
 
+            var firstNewId = newService.GetNews().First().Id;
+            var lastNewId = newService.GetNews().Last().Id;
+
+            newService.TagNew(firstNewId, "Noticias");
+            newService.TagNew(firstNewId, "Deportes");
+            newService.TagNew(lastNewId, "Espectaculos");
+
+            newService.UnTagNew(firstNewId, "Deportes");
+
+            var noticias = newService.GetNewsByTag("Noticias");
+            var deportes = newService.GetNewsByTag("Deportes");
+            var espectaculos = newService.GetNewsByTag("Espectaculos");
+            
             /*
             var connectionString = "mongodb://localhost";
 

@@ -7,10 +7,8 @@ using RssReader.Model;
 
 namespace RssReader.Services.Contracts
 {
-    public interface IFeedService
+    public interface ICurrentUserProvider
     {
-        void SuscribeFeed(string feedURL);
-
-        void RefreshFeed(Guid feedId);
+        User GetCurrentUser();
     }
 }

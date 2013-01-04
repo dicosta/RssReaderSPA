@@ -12,6 +12,8 @@ namespace RssReader.Model
 
         public Guid FeedId { get; set; }
 
+        public Guid UserId { get; set; }
+
         public string Title { get; set; }
 
         public string Body { get; set; }
@@ -21,5 +23,10 @@ namespace RssReader.Model
         public DateTime TimeStamp { get; set; } 
 
         public IList<string> Tags { get; set; }
+
+        public New()
+        {
+            this.Tags = new List<string>();
+        }
     }
 }
