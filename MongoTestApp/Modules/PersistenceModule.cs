@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using Ninject.Modules;
 using RssReader.Model;
 using RssReader.Model.Contracts;
-using RssReader.Model.Mongo.Infrastructure;
-using RssReader.Model.Mongo.Repositories;
 using Ninject.Web.Common;
+using RssReader.DAO.Mongo.Infrastructure;
 
 namespace MongoTestApp.Modules
 {

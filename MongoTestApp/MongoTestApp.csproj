@@ -73,9 +73,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RssReader.Model.Mongo\RssReader.Model.Mongo.csproj">
+    <ProjectReference Include="..\RssReader.DAO.Mongo\RssReader.DAO.Mongo.csproj">
       <Project>{27221d48-f76c-431a-b579-70712d03eef7}</Project>
-      <Name>RssReader.Model.Mongo</Name>
+      <Name>RssReader.DAO.Mongo</Name>
     </ProjectReference>
     <ProjectReference Include="..\RssReader.Model\RssReader.Model.csproj">
       <Project>{3005dc21-65e5-4ee0-83eb-ad0694039ccc}</Project>

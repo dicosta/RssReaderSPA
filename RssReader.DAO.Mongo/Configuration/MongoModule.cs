@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Ninject.Modules;
 using RssReader.Model.Contracts;
-using RssReader.Model.Mongo.Infrastructure;
-using RssReader.Model.Mongo.Infrastructure.Contracts;
+using RssReader.DAO.Mongo.Infrastructure;
+using RssReader.DAO.Mongo.Infrastructure.Contracts;
 
-namespace RssReader.Model.Mongo.Configuration
+namespace RssReader.DAO.Mongo.Configuration
 {
     public class MongoModule : NinjectModule
     {
