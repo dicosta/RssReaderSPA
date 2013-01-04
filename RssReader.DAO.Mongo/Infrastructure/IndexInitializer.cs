@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RssReader.Model.Mongo.Infrastructure.Contracts;
+using RssReader.DAO.Mongo.Infrastructure.Contracts;
+using RssReader.Model;
 
-namespace RssReader.Model.Mongo.Infrastructure
+namespace RssReader.DAO.Mongo.Infrastructure
 {
     public class IndexInitializer
     {

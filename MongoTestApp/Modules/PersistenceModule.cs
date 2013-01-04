@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using Ninject.Modules;
 using RssReader.Model;
 using RssReader.Model.Contracts;
-using RssReader.Model.Mongo.Infrastructure;
-using RssReader.Model.Mongo.Repositories;
 using Ninject.Web.Common;
+using RssReader.DAO.Mongo.Infrastructure;
+using RssReader.Services.Contracts;
+using MongoTestApp.TestHelpers;
 
 namespace MongoTestApp.Modules
 {
@@ -17,6 +18,9 @@ namespace MongoTestApp.Modules
         public override void Load()
         {
             Bind<IUnitOfWork>().To<MongoUnitOfWork>()
+                .InRequestScope();
+
+            Bind<ICurrentUserProvider>().To<CurrentUserProvider>()
                 .InRequestScope();
         }
     }

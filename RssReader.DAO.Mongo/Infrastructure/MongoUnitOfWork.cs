@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using RssReader.Model.Contracts;
-using RssReader.Model.Mongo.Infrastructure.Contracts;
+using RssReader.DAO.Mongo.Infrastructure.Contracts;
 
-namespace RssReader.Model.Mongo.Infrastructure
+namespace RssReader.DAO.Mongo.Infrastructure
 {
     public class MongoUnitOfWork : IUnitOfWork
     {

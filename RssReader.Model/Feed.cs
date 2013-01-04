@@ -16,8 +16,10 @@ namespace RssReader.Model
 
         public string Description { get; set; }
 
+        /*
         public string ImageURL { get; set; }
-
+        */
+ 
         public string LastItemDigest { get; set; }
     }
 }

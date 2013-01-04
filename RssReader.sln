@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssReader.Model", "RssReade
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoTestApp", "MongoTestApp\MongoTestApp.csproj", "{30F6784E-F7A5-45CB-8CD3-2FD4E919ACA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssReader.Model.Mongo", "RssReader.Model.Mongo\RssReader.Model.Mongo.csproj", "{27221D48-F76C-431A-B579-70712D03EEF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssReader.DAO.Mongo", "RssReader.DAO.Mongo\RssReader.DAO.Mongo.csproj", "{27221D48-F76C-431A-B579-70712D03EEF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7D33434A-35AA-419C-81F8-2BFB27D83907}"
 	ProjectSection(SolutionItems) = preProject
