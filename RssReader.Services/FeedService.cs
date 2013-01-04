@@ -15,111 +15,112 @@ using System.Security.Cryptography;
 
 namespace RssReader.Services
 {
-    public class FeedService : IFeedService
+    public class FeedService : BaseService, IFeedService
     {
         private readonly IGuidKeyedRepository<Feed> feedRepository;
         private readonly IGuidKeyedRepository<New> newRepository;
+        private readonly IGuidKeyedRepository<User> userRepository;
+        private readonly ICurrentUserProvider currentUserProvider;
 
         public FeedService(IGuidKeyedRepository<Feed> feedRepository,
-            IGuidKeyedRepository<New> newRepository)
+            IGuidKeyedRepository<New> newRepository,
+            ICurrentUserProvider currentUserProvider,
+            IGuidKeyedRepository<User> userRepository)
         {
             this.feedRepository = feedRepository;
             this.newRepository = newRepository;
+            this.currentUserProvider = currentUserProvider;
+            this.userRepository = userRepository;
         }
         
-        public void SuscribeFeed(Feed newFeed)
+        public void SuscribeFeed(string feedURL)
         {
-            GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri(newFeed.URL));
+            //check already suscribed...
 
+            GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri(feedURL));
+
+            var newFeed = new Feed();
+
+            newFeed.URL = feedURL;
             newFeed.Title = feed.Title;
             newFeed.Description = feed.Description;
-            //newFeed.ImageURL = feed. ImageUrl.ToString();
-            //newFeed.LastItemDigest = "0";
-            
-            /*
-            WebClient client = new WebClient();
-            using (XmlReader xml = new SyndicationFeedXmlReader(client.OpenRead(newFeed.URL)))
-            {
-                var feed = SyndicationFeed.Load(xml);
-
-                newFeed.Title = feed.Title.Text;
-                newFeed.Description = feed.Description.Text;
-                newFeed.ImageURL = feed.ImageUrl.ToString();
-                newFeed.LastItemTimeStamp = DateTime.UtcNow.AddYears(-5);
-            }
-            */
-
+           
             //throw if error reading feed.
 
             //add feed to collection
             feedRepository.Add(newFeed);
 
             //update current user feed collection with feed id.
+            var user = currentUserProvider.GetCurrentUser();
+            user.Feeds.Add(newFeed.Id);
+            userRepository.Update(user);
+
+            logger.Info("User {0} successfully suscribed to feed {1}", user.UserName, newFeed.URL);
+        }
+
+        public void UnsuscribeFeed(Guid feedId)
+        {
+            var user = currentUserProvider.GetCurrentUser();
+            user.Feeds.Remove(feedId);
+            userRepository.Update(user);
+
+            feedRepository.Delete(feedId);
+
+            var newsToDelete = newRepository.GetAll()
+                .Where(n => n.FeedId == feedId)
+                .Select(n => n.Id);
+
+            foreach (var newId in newsToDelete)
+            {
+                newRepository.Delete(newId);
+            }
+
+            //should we keep the data in the probability matrix?
+
+            logger.Info("User {0} successfully unsuscribed from feed {1}", user.UserName, feedId);
         }
 
         public void RefreshFeed(Guid feedId)
         {
             var feed = feedRepository.GetById(feedId);
 
-            //using (XmlReader xml = XmlReader.Create(feed.URL))
-            //{
-                //fetches the updated feed.
-                //var updatedFeed = SyndicationFeed.Load(xml);
-                GenericSyndicationFeed updatedFeed = GenericSyndicationFeed.Create(new Uri(feed.URL));
+            logger.Debug("refreshing feed {0}", feed.Title);
 
-                bool updateFeedEntity = true;
-                foreach (GenericSyndicationItem item in updatedFeed.Items)
+            GenericSyndicationFeed updatedFeed = GenericSyndicationFeed.Create(new Uri(feed.URL));
+
+            var currentUserId = currentUserProvider.GetCurrentUser().Id;
+            bool updateFeedEntity = true;
+            
+            foreach (GenericSyndicationItem item in updatedFeed.Items)
+            {
+                string itemDigest = Convert.ToBase64String(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(item.Summary)));
+
+                if (string.IsNullOrEmpty(feed.LastItemDigest) || (itemDigest != feed.LastItemDigest))
                 {
-                    string itemDigest = Convert.ToBase64String(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(item.Summary)));
+                    logger.Debug("found new entry for feed {0}", feed.Title);
 
-                    if (string.IsNullOrEmpty(feed.LastItemDigest) || (itemDigest != feed.LastItemDigest))
+                    newRepository.Add(new New()
                     {
-                        newRepository.Add(new New()
-                        {
-                            Title = item.Title,
-                            FeedId = feed.Id,
-                            Tags = new List<string>(), //get them from classify
-                            Body = item.Summary
-                        });
+                        Title = item.Title,
+                        FeedId = feed.Id,
+                        UserId = currentUserId,
+                        Tags = new List<string>(), //get them from classify
+                        Body = item.Summary
+                    });
 
-                        if (updateFeedEntity)
-                        {
-                            feed.LastItemDigest = itemDigest;
-                            feedRepository.Update(feed);
-
-                            updateFeedEntity = false;
-                        }
-                    }
-                    else
+                    if (updateFeedEntity)
                     {
-                        break;
+                        feed.LastItemDigest = itemDigest;
+                        feedRepository.Update(feed);
+
+                        updateFeedEntity = false;
                     }
                 }
-
-
-                //get the new items 
-                /*
-                var newItems = updatedFeed.Items.Where(i => i.PublishedOn.ToLocalTime() > feed.LastItemTimeStamp)
-                    .OrderBy(i => i.PublishedOn.ToLocalTime());
-
-                if (newItems.Any())
+                else
                 {
-                    feed.LastItemTimeStamp = newItems.Last().PublishedOn.ToLocalTime();
-                    feedRepository.Update(feed);
-
-                    foreach (var newItem in newItems)
-                    {
-                        newRepository.Add(new New()                        
-                        {
-                            Title = newItem.Title,
-                            FeedId = feed.Id,
-                            Tags = new List<string>(), //get them from classify
-                            Body = newItem.Summary.ToString()                            
-                        });
-                    }
+                    break;
                 }
-                */
-            //}
+            }
         }
     }
 }

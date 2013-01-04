@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Ninject.Modules;
 using RssReader.Model.Contracts;
-using RssReader.Model.Mongo.Repositories;
+using RssReader.DAO.Mongo.Repositories;
+using RssReader.Model;
 
-namespace RssReader.Model.Mongo.Configuration
+namespace RssReader.DAO.Mongo.Configuration
 {
     public class RepositoryModule : NinjectModule
     {
@@ -16,6 +17,8 @@ namespace RssReader.Model.Mongo.Configuration
             Bind<IGuidKeyedRepository<Feed>>().To<GuidKeyedRepository<Feed>>().InTransientScope();
 
             Bind<IGuidKeyedRepository<New>>().To<GuidKeyedRepository<New>>().InTransientScope();
+
+            Bind<IGuidKeyedRepository<User>>().To<GuidKeyedRepository<User>>().InTransientScope();
 
             /*
             Bind<IGuidKeyedRepository<Feed>>().To<GuidKeyedRepository<Feed>>().InTransientScope();

@@ -7,6 +7,10 @@ using Ninject.Modules;
 using RssReader.Services;
 using RssReader.Services.Contracts;
 using Ninject.Web.Common;
+using Ninject;
+using Rhino.Mocks;
+using RssReader.Model;
+using RssReader.Model.Contracts;
 
 namespace MongoTestApp.Modules
 {
@@ -15,6 +19,12 @@ namespace MongoTestApp.Modules
         public override void Load()
         {
             Bind<IFeedService>().To<FeedService>()
+                .InRequestScope();
+
+            Bind<IUserService>().To<UserService>()
+                .InRequestScope();
+
+            Bind<INewService>().To<NewService>()
                 .InRequestScope();
         }
     }

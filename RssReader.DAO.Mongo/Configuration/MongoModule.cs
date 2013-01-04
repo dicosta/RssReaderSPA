@@ -6,19 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Ninject.Modules;
 using RssReader.Model.Contracts;
-using RssReader.Model.Mongo.Infrastructure;
-using RssReader.Model.Mongo.Infrastructure.Contracts;
+using RssReader.DAO.Mongo.Infrastructure;
+using RssReader.DAO.Mongo.Infrastructure.Contracts;
+using NLog;
 
-namespace RssReader.Model.Mongo.Configuration
+namespace RssReader.DAO.Mongo.Configuration
 {
     public class MongoModule : NinjectModule
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         public override void Load()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["ReaderRssMongoDB"].ConnectionString;
 
+            logger.Debug("initializing mongo collection provider");
             IMongoCollectionProvider collectionProvider = new MongoCollectionProvider(connectionString);
 
+            logger.Debug("ensuring mongo indexes");
             var indexInitializer = new IndexInitializer(collectionProvider);
             indexInitializer.CreateIndexes();
 
