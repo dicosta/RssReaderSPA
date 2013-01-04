@@ -18,6 +18,6 @@ namespace RssReader.Model
 
         public string ImageURL { get; set; }
 
-        public DateTime LastItemTimeStamp { get; set; }
+        public string LastItemDigest { get; set; }
     }
 }

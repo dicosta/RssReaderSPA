@@ -9,6 +9,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using Ninject;
 using RssReader.Model;
+using RssReader.Services.Contracts;
 
 namespace MongoTestApp
 {
@@ -19,7 +20,17 @@ namespace MongoTestApp
             var p = new Program();
             var kernel = p.CreateKernel();
 
+            var feedService = kernel.Get<IFeedService>();
 
+            Feed newFeed = new Feed()
+            {
+                URL = "http://www.43folders.com/rss.xml"
+            };
+
+
+            feedService.SuscribeFeed(newFeed);
+
+            feedService.RefreshFeed(newFeed.Id);
 
             /*
             var connectionString = "mongodb://localhost";
@@ -61,12 +72,12 @@ namespace MongoTestApp
 
         protected IKernel CreateKernel()
         {
-            var settings = new NinjectSettings { LoadExtensions = false };
+            var settings = new NinjectSettings { LoadExtensions = false  };
 
             var kernel = new StandardKernel(settings);
 
             //kernel.Load(Assembly.GetExecutingAssembly());
-            //kernel.Load(AppDomain.CurrentDomain.GetAssemblies());
+            kernel.Load(AppDomain.CurrentDomain.GetAssemblies());
             kernel.Load("*.dll");
          
             return kernel;

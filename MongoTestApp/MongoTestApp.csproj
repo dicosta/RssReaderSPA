@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\PersistenceModule.cs" />
+    <Compile Include="Modules\ServiceModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +80,10 @@
     <ProjectReference Include="..\RssReader.Model\RssReader.Model.csproj">
       <Project>{3005dc21-65e5-4ee0-83eb-ad0694039ccc}</Project>
       <Name>RssReader.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RssReader.Services\RssReader.Services.csproj">
+      <Project>{0965d112-f433-4be7-a1e5-d026652abf84}</Project>
+      <Name>RssReader.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
