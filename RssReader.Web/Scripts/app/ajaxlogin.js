@@ -45,16 +45,30 @@
     };
 
     $("#showRegister").click(function () {
+        /*
         $("#loginPanel").hide("slide", function () {
             $("#registerPanel").show("slide", function () {
+                $("#registerName").focus();
+            });
+        });
+        */
+        $("#loginPanel").toggle(function () {
+            $("#registerPanel").toggle(function () {
                 $("#registerName").focus();
             });
         });
     });
 
     $("#showLogin").click(function () {
+        /*
         $("#registerPanel").hide("slide", function () {
             $("#loginPanel").show("slide", function () {
+                $("#loginName").focus();
+            });
+        });
+        */
+        $("#registerPanel").toggle(function () {
+            $("#loginPanel").toggle(function () {
                 $("#loginName").focus();
             });
         });

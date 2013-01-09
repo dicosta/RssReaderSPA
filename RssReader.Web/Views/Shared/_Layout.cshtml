@@ -7,44 +7,44 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
 
     <title>@ViewBag.Title</title>
 
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/rssreaderstyle")
+
+    <style type="text/css">
+    </style>
+
+    @Styles.Render("~/Content/css-responsive")
 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
-
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/themes/base/css")
 </head>
 
 <body>
-    <div id="userSettings">
-        @Html.Partial("_UserSettings")
-    </div>
+    <div class="container">
+        <div id="userSettings">
+            @Html.Partial("_UserSettings")
+        </div>
 
-    <div id="body">
         @RenderBody()
-    </div>
+    
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Rss Reader SPA</p>
+        </footer>
 
-    <footer>
-        <nav>
-            <ul id="menu">
-                <li>@Html.ActionLink("Todo List", "Index", "Home", new { area = "" }, null)</li>
-                <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>
-            </ul>
-        </nav> 
-        <p>Learn more about <a href="http://go.microsoft.com/fwlink/?LinkId=273732">Single Page Applications</a></p>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-    </footer>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
+    
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/ajaxlogin")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
