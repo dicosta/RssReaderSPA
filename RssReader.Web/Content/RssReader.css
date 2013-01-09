@@ -161,10 +161,8 @@ footer {
 }
 
 .validation-summary-errors ul {
-    /*
     padding: 0 !important;
     margin: 0 !important;
-    */
 }
 
 .validation-summary-errors li
@@ -172,8 +170,14 @@ footer {
     list-style: none !important;
 }
 
-.login-error
+.validation-summary-valid
+{
+    display: none !important;
+}
+
+.bootstrap-summary
 {
     margin-top: 25px;
+    padding: 10px 10px 10px 10px;
 }
 
