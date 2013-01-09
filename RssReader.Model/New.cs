@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RssReader.Model
 {
-    public class New
+    public class New : IGuidKeyedEntity
     {
         public Guid Id { get; set; }
 

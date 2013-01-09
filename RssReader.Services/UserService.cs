@@ -13,21 +13,21 @@ namespace RssReader.Services
     public class UserService : BaseService, IUserService
     {
         private readonly IGuidKeyedRepository<User> userRepository;
-        private readonly ICurrentUserProvider currentUserProvider;
+        private readonly ICurrentUserIdProvider currentUserIdProvider;
         private readonly INewService newService;
 
         public UserService(IGuidKeyedRepository<User> userRepository,
-            ICurrentUserProvider currentUserProvider,
+            ICurrentUserIdProvider currentUserIdProvider,
             INewService newService)
         {
             this.userRepository = userRepository;
-            this.currentUserProvider = currentUserProvider;
+            this.currentUserIdProvider = currentUserIdProvider;
             this.newService = newService;
         }
 
         public void AddCategory(string categoryName)
-        {
-            var user = currentUserProvider.GetCurrentUser();
+        {            
+            var user = this.GetById(currentUserIdProvider.GetCurrentUserId());
 
             if (user.Tags.Contains(categoryName))
             {
@@ -40,13 +40,13 @@ namespace RssReader.Services
 
                 //add category to bayesian classifier...
 
-                logger.Info("added category {0} for User {1}", categoryName, user.UserName);
+                logger.Info("added category {0} for User {1}", categoryName, user.Username);
             }
         }
 
         public void RemoveCategory(string categoryName)
         {
-            var user = currentUserProvider.GetCurrentUser();
+            var user = this.GetById(currentUserIdProvider.GetCurrentUserId());
 
             if (user.Tags.Contains(categoryName))
             {
@@ -61,12 +61,57 @@ namespace RssReader.Services
                 user.Tags.Remove(categoryName);
                 userRepository.Update(user);
 
-                logger.Info("removed category {0} for User {1}", categoryName, user.UserName);
+                logger.Info("removed category {0} for User {1}", categoryName, user.Username);
             }
             else
             {
                 throw new RssReaderBusinessException("Category does not exist.");
             }
+        }
+        
+        public bool UserIsEnabled(string userName)
+        {
+            return userRepository.GetAll().Where(u => u.Username == userName).Any();
+        }
+
+        public User GetByUserName(string userName)
+        {
+            return userRepository.GetAll().Where(u => u.Username == userName).FirstOrDefault();
+        }
+
+        public User GetById(Guid userId)
+        {
+            return userRepository.GetById(userId);
+        }
+
+        public User GetByConfirmationToken(string confirmationToken)
+        {
+            return userRepository.GetAll().Where(u => u.ConfirmationToken == confirmationToken).FirstOrDefault();
+        }
+
+        public User GetByPasswordResetToken(string passwordResetToken)
+        {
+            return userRepository.GetAll().Where(u => u.PasswordResetToken == passwordResetToken).FirstOrDefault();
+        }
+
+        public void Update(User user)
+        {
+            userRepository.Update(user);
+        }
+
+        public void Create(User user)
+        {
+            userRepository.Add(user);
+        }
+
+        public void Delete(Guid userId)
+        {
+            userRepository.Delete(userId);
+        }
+
+        public IQueryable<User> GetAll()
+        {
+            return userRepository.GetAll();
         }
     }
 }

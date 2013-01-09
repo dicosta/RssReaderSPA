@@ -29,6 +29,9 @@ namespace RssReader.Web
             bundles.Add(new ScriptBundle("~/bundles/ajaxlogin").Include(
                 "~/Scripts/app/ajaxlogin.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                "~/Scripts/app/angular.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/todo").Include(
                 "~/Scripts/app/todo.bindings.js"
                 //,
