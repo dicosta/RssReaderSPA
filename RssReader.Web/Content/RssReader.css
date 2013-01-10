@@ -1,0 +1,193 @@
+﻿/*
+.loginpage:before {
+    border-color: #F6F6C7 #FFFFFF;
+    border-style: solid;
+    border-width: 0 0 24px 24px;
+    content: "";
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+*/
+
+.loginpage {
+    background-color: #FFFFFF;
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    display: inline-block;
+    margin: 1em;
+    min-height: 280px;
+    padding-top: 8px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    width: 280px;
+}
+
+#loginPanel {
+    display: block;
+    float: left;
+    padding: 20px 20px 0;
+    position: relative;
+    text-align: left;
+    width: 600px;
+}
+
+#registerPanel {
+    display: none;
+    float: left;
+    padding: 20px 20px 0;
+    position: relative;
+    text-align: left;
+}
+
+#changePasswordForm input,
+#registerForm input,
+#loginForm input {
+    border: 1px solid #dedede;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#changePasswordForm input[type=text], #changePasswordForm input[type=password],
+#registerForm input[type=text], #registerForm input[type=password],
+#loginForm input[type=text], #loginForm input[type=password] {
+    background: white;
+    width: 220px;
+}
+
+#loginForm input[type=checkbox]{
+    border: none;
+}
+
+#changePasswordForm input[type=submit] {
+    margin-bottom: .8em;
+}
+
+
+#registerPanel h2,
+#loginPanel h2 {
+    /*padding-bottom: .5em;*/
+    margin: 0;
+}
+
+#registerPanel a,
+#loginPanel a {
+    color: navy;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#registerPanel p,
+#loginPanel p {
+    clear: both;
+}
+
+#localLoginPanel {
+    border-right: solid 2px #c8c8c8;
+    float: left;
+    width: 45%;
+    text-align: left;
+}
+
+#socialLoginPanel {
+    margin-left: 40px;
+    float: left;
+    width: 45%;
+    text-align: left;
+}
+
+#socialLoginPanel h2 {
+    margin-bottom:  5px;
+}
+
+    
+fieldset {
+    border: none;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: left;
+    display: inline;
+}
+
+fieldset legend {
+    display: none;
+}
+
+fieldset label:not(.checkbox) {
+    display: block;
+    text-align: left;
+}
+
+fieldset ol {
+    padding: 0;
+    margin: 0 0 8px 0;
+    list-style: none;
+}
+
+fieldset ol li {
+    padding-bottom: 5px;
+}
+
+ol.round {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+body {
+    padding-bottom: 40px;
+    padding-top: 60px;
+}
+
+footer {
+    clear: both;
+    margin: 5em 5em 0.7em 1em;
+}
+
+.btn-center {
+    text-align: center;
+}
+
+
+.validation-summary-errors {
+    /*
+    color: red;
+    
+    width: 220px;
+    font-size: .8em;
+    
+    list-style: none !important;
+     */
+}
+
+.validation-summary-errors ul {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.validation-summary-errors li
+{
+    list-style: none !important;
+}
+
+.validation-summary-valid
+{
+    display: none !important;
+}
+
+.bootstrap-summary
+{
+    margin-top: 25px;
+    padding: 10px 10px 10px 10px;
+}
+
+.main-panel {
+    background-color: #FFFFFF;
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    margin: 1em;
+    min-height: 280px;
+    padding-top: 8px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+}

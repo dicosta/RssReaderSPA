@@ -9,8 +9,12 @@ namespace RssReader.Services.Contracts
 {
     public interface IFeedService
     {
-        void SuscribeFeed(string feedURL);
+        void Suscribe(string feedURL);
+
+        void Unsuscribe(Guid feedId);
 
         void RefreshFeed(Guid feedId);
+
+        Feed GetById(Guid feedId);
     }
 }

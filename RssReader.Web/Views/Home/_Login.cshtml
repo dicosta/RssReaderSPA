@@ -1,0 +1,46 @@
+﻿@using RssReader.Web.Infrastructure.Extensions
+
+@model RssReader.Web.Models.LoginModel
+
+@using (Html.BeginForm("JsonLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginForm" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <fieldset>
+        <legend>Log in Form</legend>
+                @Html.BeginControlGroupFor(m => m.UserName)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.UserName, new { autofocus = "autofocus", id = "loginName", placeholder="User Name" })
+                    @*
+                    @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "help-inline" })
+                    *@
+                </div>
+                @Html.EndControlGroup()
+
+                @Html.BeginControlGroupFor(m => m.Password)
+                <div class="controls">
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "Password" } )
+                    @*
+                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "help-inline" })
+                    *@
+                </div>
+                @Html.EndControlGroup()
+
+                @Html.BeginControlGroupFor(m => m.Password)
+                <div class="controls">
+                    <label class="checkbox">
+                        Remember me                    
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                    </label>
+                </div>
+                @Html.EndControlGroup()
+                
+            
+                <div class ="btn-center">
+                    <input type="submit" value="Log in" class="btn btn-primary btn-large"/>
+                </div>
+        
+                @Html.ValidationSummary(false, null, new { @class = "alert alert-error bootstrap-summary" } )
+
+    </fieldset>
+}

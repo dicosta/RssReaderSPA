@@ -1,32 +1,90 @@
 ﻿<!DOCTYPE html>
-<html>
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
+
     <title>@ViewBag.Title</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/rssreaderstyle")
+
+    <style type="text/css">
+    </style>
+
+    @Styles.Render("~/Content/css-responsive")
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
+
 <body>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">
-                    <a href="~/">ASP.NET Web API</a></p>
-            </div>
-            <div class="float-right">
-                <nav>
-                    <ul id="menu">
-                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+    @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" })) {
+        @Html.AntiForgeryToken()
+    }
+    
+    <div class="navbar navbar-inverse navbar-fixed-top">
+	    <div class="navbar-inner">
+            @*<b style="color:red">DEBUG: need to refactor into partial for selectable menu</b><br />*@
+		    <div class="container">
+                <a class="brand" href="#">RSS Reader SPA</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li>
+                            <a href="#">Item 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Item 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Item 3</a>
+                        </li>
                     </ul>
-                </nav>
+
+                    <div class="pull-right">
+                        <ul class="nav">
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, @User.Identity.Name <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Preferences</a></li>
+                              <li>@Html.ActionLink("Manage account", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })</li>
+                              <li class="divider"></li>
+                              <li>    
+                                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>                                          
+                              </li>
+                              
+                            </ul>
+                          </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
-    @RenderBody()
+    </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    <div class="container" ng-app>
+                
+        @RenderBody()
+    
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Rss Reader SPA</p>
+        </footer>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")    
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/ajaxlogin")
+    @Scripts.Render("~/bundles/angular")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
