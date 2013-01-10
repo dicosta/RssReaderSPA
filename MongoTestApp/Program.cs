@@ -31,7 +31,7 @@ namespace MongoTestApp
 
             userRepository.Add(new User()
             {
-                UserName = "Diego"                
+                Username = "Diego"                
             });
 
             var currentUserProvider = kernel.Get<ICurrentUserProvider>();
@@ -40,7 +40,7 @@ namespace MongoTestApp
             userService.AddCategory("Deportes");
             userService.AddCategory("Espectaculos");
                         
-            feedService.SuscribeFeed("http://www.43folders.com/rss.xml");
+            feedService.Suscribe("http://www.43folders.com/rss.xml");
 
             var feedId = currentUserProvider.GetCurrentUser().Feeds.First();
             

@@ -36,7 +36,7 @@ namespace RssReader.Services
 
                     //train bayesian classifier...
 
-                    logger.Info("User {0} successfully tagged new {1} with category {2}", user.UserName, entry.Id, categoryName);
+                    logger.Info("User {0} successfully tagged new {1} with category {2}", user.Username, entry.Id, categoryName);
                 }
                 else
                 {
@@ -63,7 +63,7 @@ namespace RssReader.Services
 
                     //train bayesian classifier...
 
-                    logger.Info("User {0} successfully untagged new {1} from category {2}", user.UserName, entry.Id, categoryName);
+                    logger.Info("User {0} successfully untagged new {1} from category {2}", user.Username, entry.Id, categoryName);
                 }
                 else
                 {

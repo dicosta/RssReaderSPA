@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RssReader.Model.Contracts;
 using MongoDB.Driver.Linq;
+using MongoDB.Driver;
 
 namespace RssReader.DAO.Mongo.Repositories
 {

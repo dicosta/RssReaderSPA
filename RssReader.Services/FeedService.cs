@@ -32,8 +32,13 @@ namespace RssReader.Services
             this.currentUserProvider = currentUserProvider;
             this.userRepository = userRepository;
         }
+
+        public Feed GetById(Guid feedId)
+        {
+            return feedRepository.GetById(feedId);
+        }
         
-        public void SuscribeFeed(string feedURL)
+        public void Suscribe(string feedURL)
         {
             //check already suscribed...
 
@@ -55,10 +60,10 @@ namespace RssReader.Services
             user.Feeds.Add(newFeed.Id);
             userRepository.Update(user);
 
-            logger.Info("User {0} successfully suscribed to feed {1}", user.UserName, newFeed.URL);
+            logger.Info("User {0} successfully suscribed to feed {1}", user.Username, newFeed.URL);
         }
 
-        public void UnsuscribeFeed(Guid feedId)
+        public void Unsuscribe(Guid feedId)
         {
             var user = currentUserProvider.GetCurrentUser();
             user.Feeds.Remove(feedId);
@@ -77,7 +82,7 @@ namespace RssReader.Services
 
             //should we keep the data in the probability matrix?
 
-            logger.Info("User {0} successfully unsuscribed from feed {1}", user.UserName, feedId);
+            logger.Info("User {0} successfully unsuscribed from feed {1}", user.Username, feedId);
         }
 
         public void RefreshFeed(Guid feedId)
