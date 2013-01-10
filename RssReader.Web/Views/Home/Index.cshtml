@@ -3,20 +3,27 @@
     ViewBag.Title = "Welcome to RSS Reader SPA";
 }
 
+<style>
+    body
+    {
+            background-color: #F5F5F5;
+    }
+</style>
+
 @if (@User.Identity.IsAuthenticated)
 {
-    <p class="error" data-bind="text: error"></p>
-    
-    <h3> hola estoy autenticado </h3>
+    <div class="main-panel">
+        <h3> hola estoy autenticado </h3>
+
+        <!--
+            
+            news grid...
+
+             -->
+    </div>    
 }
 else
 {
-    <style>
-        body
-        {
-             background-color: #F5F5F5;
-        }
-    </style>
     
     <header>
         <h2>@ViewBag.Title</h2>

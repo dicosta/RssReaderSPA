@@ -181,3 +181,13 @@ footer {
     padding: 10px 10px 10px 10px;
 }
 
+.main-panel {
+    background-color: #FFFFFF;
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    margin: 1em;
+    min-height: 280px;
+    padding-top: 8px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+}
