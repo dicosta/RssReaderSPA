@@ -23,17 +23,20 @@ namespace RssReader.Web
                         "~/scripts/jquery.validate.unobtrusive.js",
                         "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap*"));
 
+            /*
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                         "~/Scripts/knockout-{version}.js"));
+            */
 
             bundles.Add(new ScriptBundle("~/bundles/ajaxlogin").Include(
                 "~/Scripts/app/ajaxlogin.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                "~/Scripts/app/angular.js"));
+                "~/Scripts/angular.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/todo").Include(
-                "~/Scripts/app/todo.bindings.js"
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/Scripts/app/app.js",
+                "~/Scripts/app/controllers.js"
                 //,
                 //"~/Scripts/app/todo.datacontext.js",
                 //"~/Scripts/app/todo.model.js",

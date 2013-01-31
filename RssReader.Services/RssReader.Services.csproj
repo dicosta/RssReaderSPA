@@ -57,7 +57,7 @@
     <Compile Include="BaseService.cs" />
     <Compile Include="Contracts\ICurrentUserProvider.cs" />
     <Compile Include="Contracts\IFeedService.cs" />
-    <Compile Include="Contracts\ICurrentUserIdProvider.cs" />
+    <Compile Include="Contracts\ICurrentUserNameProvider.cs" />
     <Compile Include="Contracts\INewService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Exceptions\RssReaderBusinessException.cs" />

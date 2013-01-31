@@ -206,7 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Auth\CurrentUserIdProvider.cs" />
+    <Compile Include="Infrastructure\Auth\CurrentUserNameProvider.cs" />
     <Compile Include="Infrastructure\Auth\CurrentUserProvider.cs" />
     <Compile Include="Infrastructure\Auth\MongoExtendedMemberShipProvider.cs" />
     <Compile Include="Infrastructure\Auth\MongoMemberShipProvider.cs" />
@@ -311,6 +311,8 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\ajaxlogin.js" />
+    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\controllers.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\i18n\angular-locale_am-et.js" />
@@ -521,6 +523,8 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Home\_Login.cshtml" />
     <Content Include="Views\Home\_Register.cshtml" />
+    <Content Include="Views\Home\News.cshtml" />
+    <Content Include="Views\Home\Configuration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

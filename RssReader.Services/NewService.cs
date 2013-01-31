@@ -13,18 +13,22 @@ namespace RssReader.Services
     public class NewService : BaseService, INewService
     {
         private readonly IGuidKeyedRepository<New> newRepository;
-        private readonly ICurrentUserProvider currentUserProvider;
-
+        private readonly ICurrentUserNameProvider currentUserNameProvider;
+        private readonly IGuidKeyedRepository<User> userRepository;
+        
         public NewService(IGuidKeyedRepository<New> newRepository,
-                        ICurrentUserProvider currentUserProvider)
+                        ICurrentUserProvider currentUserProvider,
+                        ICurrentUserNameProvider currentUserNameProvider,
+                        IGuidKeyedRepository<User> userRepository)
         {
             this.newRepository = newRepository;
-            this.currentUserProvider = currentUserProvider;
+            this.currentUserNameProvider = currentUserNameProvider;
+            this.userRepository = userRepository;
         }
 
         public void TagNew(Guid newId, string categoryName)
         {
-            var user = currentUserProvider.GetCurrentUser();
+            var user = userRepository.GetAll().Where(u => u.Username == currentUserNameProvider.GetCurrentUserName()).FirstOrDefault();
 
             if (user.Tags.Contains(categoryName))
             {
@@ -51,7 +55,7 @@ namespace RssReader.Services
 
         public void UnTagNew(Guid newId, string categoryName)
         {
-            var user = currentUserProvider.GetCurrentUser();
+            var user = userRepository.GetAll().Where(u => u.Username == currentUserNameProvider.GetCurrentUserName()).FirstOrDefault();
 
             if (user.Tags.Contains(categoryName))
             {
@@ -79,19 +83,19 @@ namespace RssReader.Services
 
         public IQueryable<New> GetNewsByTag(string categoryName)
         {
-            var userId = currentUserProvider.GetCurrentUser().Id;
+            var user = userRepository.GetAll().Where(u => u.Username == currentUserNameProvider.GetCurrentUserName()).FirstOrDefault();
 
             return newRepository.GetAll()
-                .Where(n => n.UserId == userId && n.Tags.Contains(categoryName))
+                .Where(n => n.UserId == user.Id && n.Tags.Contains(categoryName))
                 .OrderBy(n => n.TimeStamp);
         }
 
         public IQueryable<New> GetNews()
         {
-            var userId = currentUserProvider.GetCurrentUser().Id;
+            var user = userRepository.GetAll().Where(u => u.Username == currentUserNameProvider.GetCurrentUserName()).FirstOrDefault();
 
             return newRepository.GetAll()
-                .Where(n => n.UserId == userId)
+                .Where(n => n.UserId == user.Id)
                 .OrderBy(n => n.TimeStamp); 
         }
     }

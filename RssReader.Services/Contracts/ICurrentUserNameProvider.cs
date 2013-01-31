@@ -7,8 +7,8 @@ using RssReader.Model;
 
 namespace RssReader.Services.Contracts
 {
-    public interface ICurrentUserIdProvider
+    public interface ICurrentUserNameProvider
     {
-        Guid GetCurrentUserId();
+        string GetCurrentUserName();
     }
 }

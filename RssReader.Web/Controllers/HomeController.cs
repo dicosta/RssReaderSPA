@@ -12,5 +12,15 @@ namespace RssReader.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult News()
+        {
+            return View();
+        }
+
+        public ActionResult Configuration()
+        {
+            return View();
+        }
     }
 }

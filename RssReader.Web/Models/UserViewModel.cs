@@ -26,6 +26,7 @@ namespace RssReader.Web.Models
         }
                 
         public UserViewModel(User user)
+            :this()
         {
             Mapper.Map(user, this);            
         }
@@ -33,6 +34,7 @@ namespace RssReader.Web.Models
         public UserViewModel()
         {
             Feeds = new List<FeedViewModel>();
+            Tags = new List<string>();
         }
     }
 }
