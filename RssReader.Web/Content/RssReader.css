@@ -191,3 +191,28 @@ footer {
     text-align: center;
     vertical-align: top;
 }
+
+#suscription-partial form
+{
+    text-align: right;
+}
+
+#suscription-partial .well
+{
+    text-align: left;
+    margin-left: 5%;
+    width: 65%;
+}
+
+#suscription-partial .alert
+{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#news-partial
+{
+    text-align: left;
+    padding-left:10px; 
+    padding-right:10px;
+}

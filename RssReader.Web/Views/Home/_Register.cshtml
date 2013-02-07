@@ -18,14 +18,14 @@
 
         @Html.BeginControlGroupFor(m => m.Password)
         <div class="controls">
-            @Html.TextBoxFor(m => m.Password, new { placeholder="Password" })
+            @Html.PasswordFor(m => m.Password, new { placeholder="Password" })
             @Html.ValidationMessageFor(m => m.Password, null, new { @class = "help-inline" })
         </div>
         @Html.EndControlGroup()          
         
        @Html.BeginControlGroupFor(m => m.ConfirmPassword)
         <div class="controls">
-            @Html.TextBoxFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
             @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "help-inline" })
         </div>
         @Html.EndControlGroup()                     

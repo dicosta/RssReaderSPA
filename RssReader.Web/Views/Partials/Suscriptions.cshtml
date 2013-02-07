@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;   
+}
+
+<div id="suscription-partial">
+    <!--
+        <h1>Suscriptions</h1>
+    -->
+
+    <form ng-submit="suscribeFeed()">         
+        <fieldset>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" ng-model="feedURL" placeholder="enter a new feed url here..." class="input-xxlarge"><button class="btn" type="submit">Suscribe!</button>
+                </div>                
+            </div>
+        </fieldset>
+    </form>
+
+    <div ng-show="!feeds.length" class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        There are no suscriptions.
+    </div>
+    
+    <div ng-repeat="feed in feeds">
+        <div class="well well-small">
+            <label><strong>{{feed.Title}}</strong></label>
+            <span>{{feed.URL}}</span>
+            <a class="pull-right" href="#" ng-click="unsuscribeFeed(feed.Id)"><i class="icon-trash"></i></a>
+        </div>
+    </div>
+    
+</div>

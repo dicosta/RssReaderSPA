@@ -20,16 +20,16 @@ namespace RssReader.Services
         private readonly IGuidKeyedRepository<Feed> feedRepository;
         private readonly IGuidKeyedRepository<New> newRepository;
         private readonly IGuidKeyedRepository<User> userRepository;
-        private readonly ICurrentUserProvider currentUserProvider;
+        private readonly ICurrentUserNameProvider currentUserNameProvider;
 
         public FeedService(IGuidKeyedRepository<Feed> feedRepository,
             IGuidKeyedRepository<New> newRepository,
-            ICurrentUserProvider currentUserProvider,
+            ICurrentUserNameProvider currentUserNameProvider,
             IGuidKeyedRepository<User> userRepository)
         {
             this.feedRepository = feedRepository;
             this.newRepository = newRepository;
-            this.currentUserProvider = currentUserProvider;
+            this.currentUserNameProvider = currentUserNameProvider;
             this.userRepository = userRepository;
         }
 
@@ -38,7 +38,7 @@ namespace RssReader.Services
             return feedRepository.GetById(feedId);
         }
         
-        public void Suscribe(string feedURL)
+        public Feed Suscribe(string feedURL)
         {
             //check already suscribed...
 
@@ -56,16 +56,18 @@ namespace RssReader.Services
             feedRepository.Add(newFeed);
 
             //update current user feed collection with feed id.
-            var user = currentUserProvider.GetCurrentUser();
+            var user = userRepository.GetAll().Where(u => u.Username == currentUserNameProvider.GetCurrentUserName()).FirstOrDefault();
             user.Feeds.Add(newFeed.Id);
             userRepository.Update(user);
 
             logger.Info("User {0} successfully suscribed to feed {1}", user.Username, newFeed.URL);
+
+            return newFeed;
         }
 
         public void Unsuscribe(Guid feedId)
         {
-            var user = currentUserProvider.GetCurrentUser();
+            var user = userRepository.GetAll().Where(u => u.Username == currentUserNameProvider.GetCurrentUserName()).FirstOrDefault();
             user.Feeds.Remove(feedId);
             userRepository.Update(user);
 
@@ -93,7 +95,7 @@ namespace RssReader.Services
 
             GenericSyndicationFeed updatedFeed = GenericSyndicationFeed.Create(new Uri(feed.URL));
 
-            var currentUserId = currentUserProvider.GetCurrentUser().Id;
+            var user = userRepository.GetAll().Where(u => u.Username == currentUserNameProvider.GetCurrentUserName()).FirstOrDefault();
             bool updateFeedEntity = true;
             
             foreach (GenericSyndicationItem item in updatedFeed.Items)
@@ -108,7 +110,7 @@ namespace RssReader.Services
                     {
                         Title = item.Title,
                         FeedId = feed.Id,
-                        UserId = currentUserId,
+                        UserId = user.Id,
                         Tags = new List<string>(), //get them from classify
                         Body = item.Summary
                     });

@@ -21,19 +21,26 @@ namespace RssReader.Web
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate.js",
                         "~/scripts/jquery.validate.unobtrusive.js",
-                        "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap*"));
+                        "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap*"
+                        ));
 
+            /*
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                         "~/Scripts/knockout-{version}.js"));
+            */
 
             bundles.Add(new ScriptBundle("~/bundles/ajaxlogin").Include(
                 "~/Scripts/app/ajaxlogin.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                "~/Scripts/app/angular.js"));
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-ui.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/todo").Include(
-                "~/Scripts/app/todo.bindings.js"
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/Scripts/spin.js",
+                "~/Scripts/select2.js",
+                "~/Scripts/app/app.js",
+                "~/Scripts/app/controllers.js"
                 //,
                 //"~/Scripts/app/todo.datacontext.js",
                 //"~/Scripts/app/todo.model.js",
@@ -57,7 +64,8 @@ namespace RssReader.Web
                 ));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
-                "~/Content/bootstrap.css"
+                "~/Content/bootstrap.css",
+                "~/Content/select2.css"
             ));
 
             bundles.Add(new StyleBundle("~/content/css-responsive").Include(

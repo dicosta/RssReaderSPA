@@ -9,7 +9,7 @@ namespace RssReader.Services.Contracts
 {
     public interface IFeedService
     {
-        void Suscribe(string feedURL);
+        Feed Suscribe(string feedURL);
 
         void Unsuscribe(Guid feedId);
 
