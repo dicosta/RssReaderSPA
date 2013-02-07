@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 using RssReader.Services.Contracts;
 using RssReader.Web.Models;
 
@@ -31,6 +30,7 @@ namespace RssReader.Web.Controllers
             newService.UnTagNew(newId, categoryName);
         }
 
+        [HttpGet]
         public IList<NewViewModel> GetNews()
         {
             IList<NewViewModel> retValue = new List<NewViewModel>();
@@ -43,11 +43,12 @@ namespace RssReader.Web.Controllers
             return retValue;
         }
 
-        public IList<NewViewModel> GetNewsByTag(string categoryName)
+        [HttpGet]
+        public IList<NewViewModel> GetNewsByTag(string id)
         {
             IList<NewViewModel> retValue = new List<NewViewModel>();
 
-            foreach (var newEntry in newService.GetNewsByTag(categoryName))
+            foreach (var newEntry in newService.GetNewsByTag(id))
             {
                 retValue.Add(new NewViewModel(newEntry));
             }

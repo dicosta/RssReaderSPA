@@ -9,6 +9,8 @@ namespace RssReader.Web.Models
 {
     public class FeedViewModel : BaseMappeableViewModel<Feed>
     {
+        public Guid Id { get; set; }
+
         public string Title { get; set; }
 
         public string URL { get; set; }

@@ -18,7 +18,7 @@ namespace RssReader.Web.Infrastructure.Modules
             Bind<IUnitOfWork>().To<MongoUnitOfWork>()
                 .InRequestScope();
 
-            Bind<ICurrentUserIdProvider>().To<CurrentUserIdProvider>()
+            Bind<ICurrentUserNameProvider>().To<CurrentUserNameProvider>()
                 .InRequestScope();
 
             Bind<ICurrentUserProvider>().To<CurrentUserProvider>()

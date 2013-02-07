@@ -13,21 +13,21 @@ namespace RssReader.Services
     public class UserService : BaseService, IUserService
     {
         private readonly IGuidKeyedRepository<User> userRepository;
-        private readonly ICurrentUserIdProvider currentUserIdProvider;
+        private readonly ICurrentUserNameProvider currentUserNameProvider;
         private readonly INewService newService;
 
         public UserService(IGuidKeyedRepository<User> userRepository,
-            ICurrentUserIdProvider currentUserIdProvider,
+            ICurrentUserNameProvider currentUserIdProvider,
             INewService newService)
         {
             this.userRepository = userRepository;
-            this.currentUserIdProvider = currentUserIdProvider;
+            this.currentUserNameProvider = currentUserIdProvider;
             this.newService = newService;
         }
 
         public void AddCategory(string categoryName)
-        {            
-            var user = this.GetById(currentUserIdProvider.GetCurrentUserId());
+        {
+            var user = this.GetByUserName(currentUserNameProvider.GetCurrentUserName());
 
             if (user.Tags.Contains(categoryName))
             {
@@ -46,7 +46,7 @@ namespace RssReader.Services
 
         public void RemoveCategory(string categoryName)
         {
-            var user = this.GetById(currentUserIdProvider.GetCurrentUserId());
+            var user = this.GetByUserName(currentUserNameProvider.GetCurrentUserName());
 
             if (user.Tags.Contains(categoryName))
             {

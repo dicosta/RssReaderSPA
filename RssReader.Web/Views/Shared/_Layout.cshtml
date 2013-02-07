@@ -26,50 +26,8 @@
 </head>
 
 <body>
-    @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" })) {
-        @Html.AntiForgeryToken()
-    }
     
-    <div class="navbar navbar-inverse navbar-fixed-top">
-	    <div class="navbar-inner">
-            @*<b style="color:red">DEBUG: need to refactor into partial for selectable menu</b><br />*@
-		    <div class="container">
-                <a class="brand" href="#">RSS Reader SPA</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li>
-                            <a href="#">Item 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Item 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Item 3</a>
-                        </li>
-                    </ul>
-
-                    <div class="pull-right">
-                        <ul class="nav">
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, @User.Identity.Name <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Preferences</a></li>
-                              <li>@Html.ActionLink("Manage account", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })</li>
-                              <li class="divider"></li>
-                              <li>    
-                                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>                                          
-                              </li>
-                              
-                            </ul>
-                          </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container" ng-app>
+    <div class="container" ng-app="rssReaderSPA">
                 
         @RenderBody()
     
@@ -78,12 +36,11 @@
         </footer>
 
     </div>
-
+    
     @Scripts.Render("~/bundles/jquery")    
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/ajaxlogin")
-    @Scripts.Render("~/bundles/angular")
 
     @RenderSection("scripts", required: false)
 </body>
