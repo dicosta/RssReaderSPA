@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;   
+}
+
+<div id="news-partial">
+   
+         <button ng-click="example">ADD</button>
+
+
+    <div class="well" ng-repeat="new in news" ng-model="new">
+
+        @*
+        <select>
+            <option ng-selected="selected(option.value)" ng-repeat="item in tags | excludeExistingTags:new.Tags" value="{{item}}">{{item}}</option>
+        </select>
+        *@
+
+
+
+        
+        <label><strong>{{new.Title}}</strong></label>
+        @*
+        <br />
+
+        <div ng-bind-html-unsafe="new.Body">{{new.Body}}</div>
+        
+        
+        <div ng-repeat="tag in new.Tags">
+            <span class="label label-info">tag</span>
+        </div>
+        *@
+        
+                
+        @*
+        <select ui-select2 ng-model="selectedTag" data-placeholder="-- Select One --">
+            <option></option>
+            <option ng-repeat="item in tags | excludeExistingTags:new.Tags" value="{{item}}">{{item}}</option>
+        </select>
+                
+        <input ui-select2="version2" ng-model="version2model" data-placeholder="-- Select One --" />
+        *@
+
+    </div>
+</div>

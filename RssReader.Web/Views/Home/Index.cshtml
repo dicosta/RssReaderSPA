@@ -21,17 +21,14 @@
 	    <div class="navbar-inner">
             @*<b style="color:red">DEBUG: need to refactor into partial for selectable menu</b><br />*@
 		    <div class="container">
-                <a class="brand" href="#">RSS Reader SPA</a>
+                <a class="brand" href="/">RSS Reader SPA</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li>
-                            <a href="/configuration">Item 1</a>
+                            <a href="/suscriptions">Item 1</a>
                         </li>
                         <li>
                             <a href="news/cine">Item 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Item 3</a>
                         </li>
                     </ul>
 
@@ -40,7 +37,7 @@
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, @User.Identity.Name <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Preferences</a></li>
+                                <li><a href="/suscriptions">Suscriptions</a></li>
                                 <li>@Html.ActionLink("Manage account", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })</li>
                                 <li class="divider"></li>
                                 <li>    
@@ -56,8 +53,10 @@
         </div>
     </div>
     
+    <!--
     <h3> hola estoy autenticado </h3>
-
+    -->
+    
     <div ng-view class="main-panel"></div>
 }
 else
@@ -94,6 +93,9 @@ else
         @* add business jss here*@
         
         @Scripts.Render("~/bundles/angular")
+
+        <script src="http://ivaynberg.github.com/select2/select2-3.2/select2.js"></script>
+
         @Scripts.Render("~/bundles/app")
     }
 }

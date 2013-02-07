@@ -17,7 +17,7 @@ namespace RssReader.Web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                constraints: new { controller = "home|account" }
+                constraints: new { controller = "home|account|partials" }
             );
 
             routes.MapRoute(

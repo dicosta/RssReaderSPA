@@ -12,14 +12,12 @@ namespace RssReader.Web.Controllers
     public class UserController : ApiController
     {
         private readonly IUserService userService;
-        //public readonly ICurrentUserProvider currentUserProvider;
         public readonly IFeedService feedService;
 
-        public UserController(IUserService userService, //ICurrentUserProvider currentUserProvider,
+        public UserController(IUserService userService,
             IFeedService feedService)
         {
             this.userService = userService;
-            //this.currentUserProvider = currentUserProvider;
             this.feedService = feedService;
         }
 
@@ -54,10 +52,12 @@ namespace RssReader.Web.Controllers
 
         [HttpPost]
         [ActionName("feed")]
-        public void SuscribeFeed([FromBody]string url)
+        public FeedViewModel SuscribeFeed([FromBody]string url)
         {
             var feed = feedService.Suscribe(url);
             feedService.RefreshFeed(feed.Id);
+
+            return new FeedViewModel(feed);
         }
 
         [HttpDelete]

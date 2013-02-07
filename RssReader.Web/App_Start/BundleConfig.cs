@@ -21,7 +21,8 @@ namespace RssReader.Web
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate.js",
                         "~/scripts/jquery.validate.unobtrusive.js",
-                        "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap*"));
+                        "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap*"
+                        ));
 
             /*
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
@@ -32,9 +33,12 @@ namespace RssReader.Web
                 "~/Scripts/app/ajaxlogin.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                "~/Scripts/angular.js"));
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-ui.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/Scripts/spin.js",
+                "~/Scripts/select2.js",
                 "~/Scripts/app/app.js",
                 "~/Scripts/app/controllers.js"
                 //,
@@ -60,7 +64,8 @@ namespace RssReader.Web
                 ));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
-                "~/Content/bootstrap.css"
+                "~/Content/bootstrap.css",
+                "~/Content/select2.css"
             ));
 
             bundles.Add(new StyleBundle("~/content/css-responsive").Include(
