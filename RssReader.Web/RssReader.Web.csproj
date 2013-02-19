@@ -226,6 +226,7 @@
     <Compile Include="Models\BaseMappeableViewModel.cs" />
     <Compile Include="Models\FeedViewModel.cs" />
     <Compile Include="Models\NewViewModel.cs" />
+    <Compile Include="Models\TagNewViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -302,6 +303,9 @@
     <Content Include="Scripts\app\ajaxlogin.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\controllers.js" />
+    <Content Include="Scripts\app\directives.js" />
+    <Content Include="Scripts\app\filters.js" />
+    <Content Include="Scripts\app\services.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\i18n\angular-locale_am-et.js" />

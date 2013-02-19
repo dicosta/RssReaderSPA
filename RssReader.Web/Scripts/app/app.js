@@ -1,49 +1,24 @@
-﻿angular.module('rssReaderSPA', ['http-loading-interceptor', 'ui'], function ($routeProvider, $locationProvider, $provide) {
-    $routeProvider.when('/news/:category', {
-        templateUrl: '/partials/news',
-        controller: NewsController
+﻿var app = angular.module('rssReaderSPA', ['http-loading-interceptor',
+                                          'ui',
+                                          'rssReader.services',
+                                          'rssReader.filters'],
+    function ($routeProvider, $locationProvider, $provide) {
+
+        $routeProvider.when('/news/:category', {
+            templateUrl: '/partials/news',
+            controller: NewsController
+        });
+
+        $routeProvider.when('/suscriptions', {
+            templateUrl: '/partials/suscriptions',
+            controller: SuscriptionController
+        });
+
+        $routeProvider.otherwise({ redirectTo: '/news/all' });
+
+        // configure html5 to get links working on jsfiddle
+        $locationProvider.html5Mode(true);
     });
-
-    $routeProvider.when('/suscriptions', {
-        templateUrl: '/partials/suscriptions',
-        controller: SuscriptionController
-    });
-
-    $routeProvider.otherwise({ redirectTo: '/news/all' });
-
-    // configure html5 to get links working on jsfiddle
-    $locationProvider.html5Mode(true);
-
-    $provide.factory('userService', function ($http) {
-        alert('user service constructor');
-
-        return {
-            get: function (callback) {
-                $http.get('/api/user/getuser').success(function (data) {
-                    // prepare data here
-                    callback(data);
-                });
-            }
-        };
-
-    });
-})
-.filter('excludeExistingTags', function(){
-
-    return function (all, existing) {
-
-        var arrayToReturn = [];
-
-        for (var j = 0; j < all.length; j++) {
-
-            if (existing.indexOf(all[j]) == -1) {
-                arrayToReturn.push(all[j]);
-            };
-        }
-
-        return arrayToReturn;
-    };
-});
 
 /*
 taken from:

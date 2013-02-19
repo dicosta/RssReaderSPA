@@ -20,14 +20,16 @@ namespace RssReader.Web.Controllers
             this.currentUserProvider = currentUserProvider;
         }
 
-        public void TagNew(Guid newId, string categoryName)
+        [HttpPost]
+        public void TagNew([FromBody]TagNewViewModel tagNew)
         {
-            newService.TagNew(newId, categoryName);
+            newService.TagNew(tagNew.NewId, tagNew.TagName);
         }
 
-        public void UnTagNew(Guid newId, string categoryName)
+        [HttpPost]
+        public void UnTagNew([FromBody]TagNewViewModel tagNew)
         {
-            newService.UnTagNew(newId, categoryName);
+            newService.UnTagNew(tagNew.NewId, tagNew.TagName);
         }
 
         [HttpGet]

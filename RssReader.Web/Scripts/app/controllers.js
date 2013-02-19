@@ -61,14 +61,8 @@
 
 function SuscriptionController($scope, $http, $route, $routeParams, $location, userService) {
 
-    /*
-    $http.get('api/user/getuser').success(function (data) {
-        $scope.feeds = data.Feeds;
-    });
-    */
-
-    userService.get(function (data) {
-        $scope.feeds = data.Feeds;
+    userService.getFeeds(function (data) {
+        $scope.feeds = data;
     });
 
     $scope.suscribeFeed = function () {
@@ -96,81 +90,43 @@ function SuscriptionController($scope, $http, $route, $routeParams, $location, u
 
 }
 
-function MainController($scope, $http, $route, $routeParams, $location) {
+function MainController($scope, $http, $route, $routeParams, $location, userService) {
+    userService.getTags(function (data) {
+        $scope.tags = data;
+    });
 }
 
-function NewsController($scope, $http, $route, $routeParams, $location, userService) {
-    
-    var tags;
-
-    userService.get(function (data) {
-        $scope.tags = data.Tags;
-        //tags = data.Tags;
+function NewsController($scope, $http, $route, $routeParams, $location, userService, newsService, tagService) {
+        
+    userService.getTags(function (data) {
+        data.push("<b>New Tag</b>");
+        $scope.tags = data;
     });
-
-    var newsURL;
-    var data;
-
+                        
     if ($routeParams.category == 'all') {
-         newsURL = '/api/new/getnews';
+        newsService.getNews(function(data){
+            $scope.news = data;
+        });        
     }
     else {
-        newsURL = '/api/new/getnewsbytag/' + $routeParams.category;
+        newsService.getNewsByTag($routeParams.category, function(data){
+            $scope.news = data;
+        });        
     }
 
-    
-    $http.get(newsURL).success(function (data) {
-        $scope.news = data;
+    $scope.selectTagAction = function (newIndex) {
+        var currentNew = $scope.news[newIndex];
+        currentNew.Tags.push(this.selectedTag);
 
-        /*
-        for (var ii = 0; ii < $scope.news.length; ii++) {
-            $scope.$watch('news[' + ii + ']', function (changed) {
-                
-                alert(changed.text + " " + changed.done);
-            }, true);
-        }*/
-    });
-    
-    
-    /*
-    $scope.$watch('selectedTag', function (newValue, oldValue) 
-    { 
-        //scope.counter = scope.counter + 1; ;
-        if (newValue) {
-            alert('selecciono ' + newValue);
-        }
-    });
-    
+        newsService.tagNew(currentNew.Id, this.selectedTag);
 
-    $scope.selected = function (selectedOption) {
-        
-        alert('selecciono: ' + selectedOption);
-        
-    };
-    */
-
-    $scope.example = function () {
-        alert('bla');
+        this.selectedTag = null;
     }
 
-    $scope.selectAction = function () {
-        alert($scope.selectedTag);
-    }
-    /*
-    $scope.version2 = {
-        query: function (query) {
-            var data = { results: [] };
-            var existingTags = $scope.new.Tags;
+    $scope.removetag = function (newIndex, tagToRemove) {
+        var currentNew = $scope.news[newIndex];                
+        currentNew.Tags.splice(currentNew.Tags.indexOf(tagToRemove), 1);
 
-      
-            angular.forEach(tags, function (item, key) {
-                if (query.term.toUpperCase() === item.substring(0, query.term.length).toUpperCase()) {
-                    data.results.push(item);
-                }
-            });
-      
-            query.callback(data);
-        }
-    };
-    */
+        newsService.untagNew(currentNew.Id, tagToRemove);
+    }    
 }
